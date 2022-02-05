@@ -1,0 +1,53 @@
+<%- include('partials/Header') %>
+
+<div class="form-container p-5">
+
+    <div class="logo">
+        <img src="/images/devchallenges.svg" alt="">
+    </div>
+    <div class="intro mt-4">
+        <h4>Join thousands of learners from around the world</h4>
+        <p>
+            Master web development by making real-life projects.
+            There are multiple paths for you to choose
+        </p>
+    </div>
+
+    <form action="/auth/register">
+       
+        <div class="input-container">
+            <!-- <i class="fas fa-envelope"></i> -->
+            <input type="email" name="email" placeholder="Email">
+        </div>
+
+        <div class="input-container">
+            <input type="password" name="password" placeholder="Password">
+        </div>
+
+        <div class="input-container">
+            <input type="submit" value="Start coding now">
+        </div>
+
+    </form>
+
+    <div class="other-login">
+        <h4>or continue with these social profile</h4>
+
+        <div class="social-icon-group">
+            <img src="/images/Google.svg" alt=""
+            class="g-signin2" data-onsuccess="onSignIn"
+            >
+            <img src="/images/Facebook.svg" alt="">
+            <img src="/images/Twitter.svg" alt="">
+            <img src="/images/Github.svg" alt="">
+        </div>
+    </div>
+
+    <div class="suggest-box">
+        <h4>Already a member?&nbsp;<a href="/login">Login</a></h4>
+    </div>
+
+</div>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<%- include('partials/Footer') %>
