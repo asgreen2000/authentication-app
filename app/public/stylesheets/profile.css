@@ -1,0 +1,28 @@
+body {
+    padding: 10px 40px;
+}
+
+
+.top-content {
+    text-align: center;
+}
+
+.top-content h1 {
+    font-size: 36px;
+    line-height: 49px;
+    /* identical to box height */
+
+    letter-spacing: -0.035em;
+
+    color: #000000;
+
+}
+
+.top-content p {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+
+    letter-spacing: -0.035em;
+}

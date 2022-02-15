@@ -3,7 +3,8 @@ const app = express();
 const session = require('express-session');
 const mongoose = require('mongoose');
 const User = require('./models/User');
-const fetch = require('node-fetch');
+const LoginRoute = require('./Route/Login');
+const ProfileRoute = require('./Route/Profile');
 
 require('dotenv').config();
 
@@ -45,74 +46,12 @@ app.use(session({
     secret: "adgjmptw", 
     cookie: { maxAge: 60000 }}));
 
-app.get('/login', (req, res) => {
 
+app.use(LoginRoute);
+app.use(ProfileRoute);
 
-    
-    //console.log(user.validateSync().errors['method'].properties.message)
-
-    res.render('Login', {
-       css: 'login' 
-    });
-
-});
-
-app.get('/login/github', (req, res) => {
-
-    const redirect_uri = "http://localhost:3000/login/github/callback";
-  res.redirect(
-    `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`
-  );
-});
-
-
-async function getAccessToken({ code, client_id, client_secret }) {
-    const request = await fetch("https://github.com/login/oauth/access_token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        client_id,
-        client_secret,
-        code
-      })
-    });
-    const text = await request.text();
-    const params = new URLSearchParams(text);
-    return params.get("access_token");
-}
-
-async function fetchGitHubUser(token) {
-    const request = await fetch("https://api.github.com/user", {
-      headers: {
-        Authorization: "token " + token
-      }
-    });
-    return await request.json();
-}
-
-app.get("/login/github/callback", async (req, res) => {
-    const code = req.query.code;
-    const access_token = await getAccessToken({ code, client_id, client_secret });
-    const user = await fetchGitHubUser(access_token);
-    if (user) {
-        
-        res.send(user);
-    } else {
-        res.send("Login did not succeed!");
-    }
-});
 
 app.get('/register', (req, res) => {
-
-
-    const user = new User({
-
-        name: "DatBui",
-        method: "DEFAULT"
-
-    });
 
     //console.log(user.validateSync().errors['method'].properties.message)
 
@@ -121,6 +60,7 @@ app.get('/register', (req, res) => {
     });
 
 });
+
 
 
 app.listen(process.env.PORT | 3000, () => {

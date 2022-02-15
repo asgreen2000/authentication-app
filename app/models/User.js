@@ -1,12 +1,6 @@
 const mongoose = require("mongoose");
 
-const LOGIN_METOHD = {
-    FB:"FACEBOOK", 
-    GIT: "GITHUB", 
-    GG: "GOOGLE", 
-    TT: "TWITTER", 
-    DF: "DEFAULT"
-}
+const {LOGIN_METHOD} = require('../utils/ConstData');
 
 const UserSchema = new mongoose.Schema(
   { 
@@ -21,7 +15,7 @@ const UserSchema = new mongoose.Schema(
       max: 20,
       unique: true,
       required: () => {
-          return this.method == LOGIN_METOHD.DF
+          return this.method == LOGIN_METHOD.DF
       }
     },
     email: {
@@ -33,10 +27,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       min: 6,
       required: () => {
-        return this.method == LOGIN_METOHD.DF
+        return this.method == LOGIN_METHOD.DF
       }
     },
-    profilePicture: {
+    avatarUrl: {
       type: String,
       default: "",
     },
@@ -52,12 +46,12 @@ const UserSchema = new mongoose.Schema(
     method: {
         type: String,
         enum: {
-            values: [LOGIN_METOHD.FB, LOGIN_METOHD.GG, LOGIN_METOHD.GIT, LOGIN_METOHD.TT, LOGIN_METOHD.DF],
+            values: [LOGIN_METHOD.FB, LOGIN_METHOD.GG, LOGIN_METHOD.GIT, LOGIN_METHOD.TT, LOGIN_METHOD.DF],
             message: '{VALUE} is not supported'
         },
-        default: LOGIN_METOHD.DF
+        default: LOGIN_METHOD.DF
     },
-    socialApi: {
+    methodID: {
         type: String
     }
   },
