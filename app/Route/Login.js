@@ -2,8 +2,10 @@ const app = (require('express'))()
 const User = require('../models/User');
 const fetch = require('node-fetch');
 const {LOGIN_METHOD} = require('../utils/ConstData');
-
+const UserQuery = require('../utils/UserQuery');
+const bcrypt = require ('bcrypt');
 require('dotenv').config();
+
 
 const client_id = process.env.GITHUB_CLIENT_ID;
 const client_secret = process.env.GITHUB_CLIENT_SECRET;
@@ -16,7 +18,8 @@ app.get('/login', (req, res) => {
     }
     else 
     res.render('Login', {
-       css: 'login' 
+       css: 'login',
+       logMsg: req.session.logMsg
     });
 
 });
@@ -113,6 +116,32 @@ app.get("/login/github/callback", async (req, res) => {
 });
 
 
+app.post('/login', async (req, res) => {
+
+    try {
+        const username = req.body.username;
+        const password = req.body.password;
+        const foundUser = await UserQuery.findUserByUsername(username);
+
+        if (!foundUser) {
+            req.session.logMsg = "User doesn't exist!";
+            res.redirect('/login');
+        }
+        else if(!bcrypt.compareSync(password, foundUser.password)){
+            req.session.logMsg = "Wrong password!";
+            res.redirect('/login');
+        }
+        else {
+            req.session._id = foundUser._id;
+            req.session.isLogged = true;
+            res.redirect('/profile');
+        }
+    } catch (error) {
+        
+    }
+
+
+});
 
 
 module.exports = app;

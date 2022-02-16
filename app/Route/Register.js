@@ -1,6 +1,8 @@
 const app = (require('express'))()
 const User = require('../models/User');
 const UserQuery = require('../utils/UserQuery');
+const bcrypt = require ('bcrypt');
+require('dotenv').config();
 
 app.get('/register', (req, res) => {
 
@@ -8,23 +10,23 @@ app.get('/register', (req, res) => {
 
     res.render('Register', {
        css: 'register',
-       errorMsg: req.session.errorMsg 
+       regMsg: req.session.regMsg 
     });
     req.session.destroy();
 });
 
 app.post('/register', async (req, res) => {
 
-    
-    const username = req.body.username;
-    const password = req.body.password;
-    
     try {
 
+        const username = req.body.username;
+        
+        const salt = bcrypt.genSaltSync(parseInt(process.env.SALT_ROUND));
+        const password = bcrypt.hashSync(req.body.password, salt);
         const existed = await UserQuery.findUserByUsername(username);
         
         if (existed) {
-            req.session.errorMsg = "Username already exists!";
+            req.session.regMsg = "Username already exists!";
             res.redirect('/register');
         }
         else {
@@ -39,7 +41,8 @@ app.post('/register', async (req, res) => {
             res.redirect('/profile');
         }
     } catch (error) {
-        req.session.errorMsg = "Errors occurred!";
+        req.session.regMsg = "Errors occurred!";
+        console.log(error)
         res.redirect('/register');
     }
    
