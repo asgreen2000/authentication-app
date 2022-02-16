@@ -7,12 +7,17 @@ require('dotenv').config();
 app.get('/register', (req, res) => {
 
     //console.log(user.validateSync().errors['method'].properties.message)
-
-    res.render('Register', {
-       css: 'register',
-       regMsg: req.session.regMsg 
-    });
-    req.session.destroy();
+    if (req.session.isLogged) {
+        res.redirect('/profile')
+    }
+    else 
+    {
+        res.render('Register', {
+            css: 'register',
+            regMsg: req.session.regMsg 
+         });
+        req.session.destroy();
+    }
 });
 
 app.post('/register', async (req, res) => {
