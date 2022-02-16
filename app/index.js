@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const mongoose = require('mongoose');
-const User = require('./models/User');
 const LoginRoute = require('./Route/Login');
 const ProfileRoute = require('./Route/Profile');
+const RegisterRoute = require('./Route/Register');
 
 require('dotenv').config();
 
@@ -37,6 +37,8 @@ connectDB();
 
 // set view engine to ejs
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 
 app.use(express.static(__dirname + '/public'));
 // config 
@@ -49,17 +51,9 @@ app.use(session({
 
 app.use(LoginRoute);
 app.use(ProfileRoute);
+app.use(RegisterRoute);
 
 
-app.get('/register', (req, res) => {
-
-    //console.log(user.validateSync().errors['method'].properties.message)
-
-    res.render('Register', {
-       css: 'register' 
-    });
-
-});
 
 
 

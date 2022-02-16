@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       min: 3,
       max: 20,
-      unique: true,
+      unique: [true, "Username is already used by another user"],
       required: () => {
           return this.method == LOGIN_METHOD.DF
       }
@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema(
     email: {
       type: String,
       max: 50,
-      unique: true,
+      unique: false
     },
     password: {
       type: String,

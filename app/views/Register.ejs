@@ -13,33 +13,42 @@
         </p>
     </div>
 
-    <form action="/auth/register">
+    <form action="/register" method="post">
        
         <div class="input-container">
             <!-- <i class="fas fa-envelope"></i> -->
-            <input type="email" name="email" placeholder="Email">
+            <input type="text" name="username" placeholder="Username" required>
         </div>
 
         <div class="input-container">
-            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password" placeholder="Password" required>
         </div>
 
         <div class="input-container">
             <input type="submit" value="Start coding now">
         </div>
 
+        
     </form>
+    <% if (errorMsg !== undefined ) { %>
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+            <%=errorMsg%>
+        </div>
+    <% } %>
+    
 
+    
     <div class="other-login">
         <h4>or continue with these social profile</h4>
 
         <div class="social-icon-group">
-            <img src="/images/Google.svg" alt=""
+            <!-- <img src="/images/Google.svg" alt=""
             class="g-signin2" data-onsuccess="onSignIn"
             >
             <img src="/images/Facebook.svg" alt="">
-            <img src="/images/Twitter.svg" alt="">
-            <img src="/images/Github.svg" alt="">
+            <img src="/images/Twitter.svg" alt=""> -->
+            <a href="/login/github" target="_self"><img src="/images/Github.svg" alt=""></a>
         </div>
     </div>
 

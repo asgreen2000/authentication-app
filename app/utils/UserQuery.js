@@ -19,4 +19,21 @@ const findUser = async (_id) => {
     }
 }
 
-module.exports = {findUser}
+const findUserByUsername = async (username) => {
+
+    
+   
+    try {
+        
+        const user = User.findOne({username: username});
+        
+        return user;
+    } catch (error) {
+        
+        console.log(error)
+        return null
+    }
+}
+
+
+module.exports = {findUser, findUserByUsername}

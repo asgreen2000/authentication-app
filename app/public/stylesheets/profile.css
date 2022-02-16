@@ -7,6 +7,8 @@ body {
     text-align: center;
 }
 
+
+
 .top-content h1 {
     font-size: 36px;
     line-height: 49px;
@@ -25,4 +27,79 @@ body {
     /* identical to box height */
 
     letter-spacing: -0.035em;
+}
+
+.main-content {
+    border: 1px solid #E0E0E0;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+.main-content > div {
+    padding: 20px 30px;
+}
+
+.intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.intro h1 {
+    font-size: 24px;
+    line-height: 33px;
+    /* identical to box height */
+
+    letter-spacing: -0.035em;
+
+    color: #000000;
+}
+
+.intro button {
+    border: 1px solid #828282;
+    box-sizing: border-box;
+    border-radius: 12px;
+    padding: 10px 15px;
+}
+
+.top-border {
+    border: 1px solid #D3D3D3;
+}
+
+/* .top-border > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} */
+
+.top-border img {
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+}
+
+.left h2 {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    /* identical to box height */
+
+    letter-spacing: -0.035em;
+
+    color: #BDBDBD;
+}
+
+.left p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+
+    letter-spacing: -0.035em;
+
+    color: #333333;
+}
+
+.logo img {
+    border-radius: 12px;
 }

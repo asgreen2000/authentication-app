@@ -87,11 +87,10 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img
-              src="<%=user.avatarUrl%>"
+          <img src="<%=user.avatarUrl ? user.avatarUrl : '/images/user.png'%>"
               class="rounded-circle"
               height="25"
-              alt="Black and White Portrait of a Man"
+              alt=""
               loading="lazy"
             />
           </a>
@@ -123,6 +122,53 @@
     <div class="top-content">
       <h1>Personal info</h1>
       <p>Basic info, like your name and photo</p>
+    </div>
+    <div class="main-content">
+      <div class="intro">
+        <div>
+          <h1>Profile</h1>
+          <p>Some info maybe visible to other people</p>
+        </div>
+        <button class="edit-btn">Edit</button>
+      </div>
+      <div class="logo top-border">
+        <div class="left row">
+          <h2 class="col-4">PHOTO</h2>
+          <img src="<%=user.avatarUrl ? user.avatarUrl : '/images/user.png'%>" alt=""
+          class="col-8"
+          >
+        </div>
+      </div>
+      <div class="top-border">
+        <div class="left row">
+          <h2 class="col-4">NAME</h2>
+          <p class="col-8"><%=user.name%></p>
+        </div>
+      </div>
+      <div class="top-border">
+        <div class="left row">
+          <h2 class="col-4">PHONE</h2>
+          <p class="col-8"><%=user.phone ? user.phone : "Empty"%></p>
+        </div>
+      </div>
+      <div class="top-border">
+        <div class="left row">
+          <h2 class="col-4">BIO</h2>
+          <p class="col-8"><%=user.bio ? user.bio : "Empty"%></p>
+        </div>
+      </div>
+      <div class="top-border">
+        <div class="left row">
+          <h2 class="col-4">EMAIL</h2>
+          <p class="col-8"><%=user.bio ? user.email : "Empty"%></p>
+        </div>
+      </div>
+      <div class="top-border">
+        <div class="left row">
+          <h2 class="col-4">PASSWORD</h2>
+          <p class="col-8">*********</p>
+        </div>
+      </div>
     </div>
   </div>
 
